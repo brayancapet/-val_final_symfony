@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 70px;">
+            <a class="navbar-brand" href="#">Symfony</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+            <ul class="nav navbar-nav navbar-right d-flex">
+                {% if app.user %}
+                    <li><a class="nav-link" href="{{ path('show_article') }}">Mes articles</a></li>
+                    <li><a class="nav-link" href="{{ path('show_livre') }}">Mes livres</a></li>
+                    <li><a class="nav-link" href="{{ path('article') }}">Créer un article</a></li>
+                    <li><a class="nav-link" href="{{ path('livre') }}">Ajouter un livre</a></li>
+                    <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+                {% endif %}
+                {% if not app.user %}
+                    <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
+                    <li><a class="nav-link" href="{{ path('registration') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% block body %}{% endblock %}
+    </body>
+</html>
